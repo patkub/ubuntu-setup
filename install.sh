@@ -58,13 +58,14 @@ display_menu() {
 setup_cloudflare_dns() {
     # setup cloudflare dns
     # https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved
-    cat <<'EOF' >>/etc/systemd/resolved.conf.d/resolved.conf
+    sudo mkdir -p /etc/systemd/resolved.conf.d/
+    sudo cat <<'EOF' >>/etc/systemd/resolved.conf.d/resolved.conf
 [Resolve]
 DNS=1.1.1.1#one.one.one.one
 DNSOverTLS=yes
 EOF
     # reload systemd-resolvd
-    sudo systemctl restart systemd-resolved.service
+    sudo systemctl daemon-reload
 }
 
 install_apt() {
