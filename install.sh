@@ -59,11 +59,12 @@ setup_cloudflare_dns() {
     # setup cloudflare dns
     # https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved
     sudo mkdir -p /etc/systemd/resolved.conf.d/
-    sudo cat <<'EOF' >>/etc/systemd/resolved.conf.d/resolved.conf
+    sudo touch /etc/systemd/resolved.conf.d/resolved.conf
+    sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/resolved.conf
 [Resolve]
 DNS=1.1.1.1#one.one.one.one
 DNSOverTLS=yes
-EOF
+EOF'
     # reload systemd-resolvd
     sudo systemctl daemon-reload
 }
@@ -80,7 +81,7 @@ install_apt() {
 
     # Google Chrome
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-    sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+    sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
 
     # update system
     sudo apt update -y
@@ -224,6 +225,8 @@ install_sdkman() {
     fi
 
     curl -s "https://get.sdkman.io" | bash
+    # make sdkman auto answer
+    sed -i -e 's/sdkman_auto_answer=false/sdkman_auto_answer=true/g' ~/.sdkman/etc/config
     reload_bashrc
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     
@@ -239,6 +242,9 @@ install_sdkman() {
     # set default sdkman versions
     sdk default java "$SDKMAN_DEFAULT_JAVA"
     sdk default gradle "$SDKMAN_DEFAULT_GRADLE"
+    
+    # reset sdkman auto answer
+    sed -i -e 's/sdkman_auto_answer=true/sdkman_auto_answer=false/g' ~/.sdkman/etc/config
 }
 
 setup_gsettings() {
