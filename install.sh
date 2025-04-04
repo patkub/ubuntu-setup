@@ -254,6 +254,8 @@ setup_gsettings() {
     # dark theme
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-purple-dark'
+    gsettings set org.gnome.desktop.interface icon-theme 'Yaru-purple'
+    gsettings set org.gnome.desktop.sound theme-name 'Yaru'
     
     # desktop background for light and dark mode
     gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/warty-final-ubuntu.png'
@@ -273,8 +275,8 @@ setup_gsettings() {
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['firefox_firefox.desktop', 'yelp.desktop', 'snap-store_snap-store.desktop', 'org.gnome.Settings.desktop', 'transmission-gtk.desktop', 'org.remmina.Remmina.desktop', 'simple-scan.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Logs.desktop', 'org.gnome.Characters.desktop', 'org.gnome.font-viewer.desktop', 'gnome-language-selector.desktop', 'update-manager.desktop', 'software-properties-gtk.desktop', 'software-properties-drivers.desktop', 'firmware-updater_firmware-updater.desktop', 'org.gnome.PowerStats.desktop', 'gnome-session-properties.desktop', 'usb-creator-gtk.desktop', 'htop.desktop', 'psensor.desktop', 'solaar.desktop']"
     
-    # sort app picker alphabetically
-    gsettings set org.gnome.shell app-picker-layout "[]"
+    # app picker order
+    gsettings set org.gnome.shell app-picker-layout "[{'Office': <{'position': <0>}>, 'Programming': <{'position': <1>}>, 'Accessories': <{'position': <2>}>, 'SoundVideo': <{'position': <3>}>, 'Utilities': <{'position': <4>}>}]"
 }
 
 setup_all() {
