@@ -6,6 +6,7 @@
 
 PYTHON_VERSION="3.13.2"
 RUBY_VERSION="3.4.2"
+NVM_VERSION="0.40.2"
 
 # SDKMAN versions to install
 declare -a SDKMAN_JAVA_VERSIONS=(
@@ -230,7 +231,9 @@ install_sdkman() {
     curl -s "https://get.sdkman.io" | bash
     # make sdkman auto answer
     sed -i -e 's/sdkman_auto_answer=false/sdkman_auto_answer=true/g' ~/.sdkman/etc/config
+    # reload bashrc
     reload_bashrc
+    # load sdkman
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     
     # install java versions
@@ -248,6 +251,30 @@ install_sdkman() {
     
     # reset sdkman auto answer
     sed -i -e 's/sdkman_auto_answer=true/sdkman_auto_answer=false/g' ~/.sdkman/etc/config
+}
+
+install_node() {
+    # install nvm
+    # https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
+
+    # add nvm to bashrc
+    if grep -q "NVM_DIR" ~/.bashrc ; then
+        echo "nvm has already been added to ~/.bashrc"
+    else
+        cat <<'EOF' >>~/.bashrc
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+EOF
+    fi
+
+    # load nvm
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+    nvm install --lts
+    nvm use --lts
 }
 
 setup_gsettings() {
@@ -297,6 +324,9 @@ setup_all() {
     
     # sdkman
     install_sdkman
+
+    # node
+    install_node
     
     # theming
     setup_gsettings
