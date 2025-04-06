@@ -127,7 +127,6 @@ install_snaps() {
     sudo snap install --classic go
     sudo snap install --classic intellij-idea-community
     sudo snap install --classic pycharm-community
-    sudo snap install --classic ruby
 
     # JetBrains
     sudo snap install --classic clion --channel=2024.3/stable
