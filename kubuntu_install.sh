@@ -139,6 +139,9 @@ install_snaps() {
     sudo snap install --classic rider --channel=2024.3/stable
     sudo snap install --classic rubymine --channel=2024.3/stable
     sudo snap install --classic webstorm --channel=2024.3/stable
+
+    # Apps
+    sudo snap install kdenlive
     
     # Remove thunderbird
     sudo snap remove --purge thunderbird

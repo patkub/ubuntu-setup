@@ -139,6 +139,9 @@ install_snaps() {
     sudo snap install --classic rider --channel=2024.3/stable
     sudo snap install --classic rubymine --channel=2024.3/stable
     sudo snap install --classic webstorm --channel=2024.3/stable
+
+    # Apps
+    sudo snap install kdenlive
     
     # Remove thunderbird
     sudo snap remove --purge thunderbird
@@ -297,7 +300,7 @@ setup_gsettings() {
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Office"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['libreoffice-startcenter.desktop', 'libreoffice-writer.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-math.desktop', 'libreoffice-impress.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/SoundVideo/ name "Sound & Video"
-    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/SoundVideo/ apps "['org.gnome.Rhythmbox3.desktop', 'org.gnome.Totem.desktop', 'org.gnome.Shotwell.desktop', 'com.obsproject.Studio.desktop']"
+    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/SoundVideo/ apps "['com.obsproject.Studio.desktop', 'kdenlive_kdenlive.desktop', 'org.gnome.Rhythmbox3.desktop', 'org.gnome.Totem.desktop', 'org.gnome.Shotwell.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Accessories/ name "Accessories"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Accessories/ apps "['org.gnome.Calendar.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.eog.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.clocks.desktop', 'org.gnome.Snapshot.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
