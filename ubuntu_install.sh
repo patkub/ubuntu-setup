@@ -24,6 +24,18 @@ declare -a SDKMAN_GRADLE_VERSIONS=(
 SDKMAN_DEFAULT_JAVA="21.0.6-amzn"
 SDKMAN_DEFAULT_GRADLE="7.6.4"
 
+# JetBrains
+JETBRAINS_CLION_CHANNEL="2024.3/stable"
+JETBRAINS_DATAGRIP_CHANNEL="2024.3/stable"
+JETBRAINS_DATASPELL_CHANNEL="2024.3/stable"
+JETBRAINS_GOLAND_CHANNEL="2024.3/stable"
+JETBRAINS_INTELLIJ_IDEA_ULTIMATE_CHANNEL="2024.3/stable"
+JETBRAINS_PHPSTORM_CHANNEL="2024.3/stable"
+JETBRAINS_PYCHARM_PROFESSIONAL_CHANNEL="2024.3/stable"
+JETBRAINS_RIDER_CHANNEL="2024.3/stable"
+JETBRAINS_RUBYMINE_CHANNEL="2024.3/stable"
+JETBRAINS_WEBSTORM_CHANNEL="2024.3/stable"
+
 ###
 ### Start
 ###
@@ -145,16 +157,16 @@ install_snaps() {
     sudo snap install --classic pycharm-community
 
     # JetBrains
-    sudo snap install --classic clion --channel=2024.3/stable
-    sudo snap install --classic datagrip --channel=2024.3/stable
-    sudo snap install --classic dataspell --channel=2024.3/stable
-    sudo snap install --classic goland --channel=2024.3/stable
-    sudo snap install --classic intellij-idea-ultimate --channel=2024.3/stable
-    sudo snap install --classic phpstorm --channel=2024.3/stable
-    sudo snap install --classic pycharm-professional --channel=2024.3/stable
-    sudo snap install --classic rider --channel=2024.3/stable
-    sudo snap install --classic rubymine --channel=2024.3/stable
-    sudo snap install --classic webstorm --channel=2024.3/stable
+    sudo snap install --classic clion --channel="$JETBRAINS_CLION_CHANNEL"
+    sudo snap install --classic datagrip --channel="$JETBRAINS_DATAGRIP_CHANNEL"
+    sudo snap install --classic dataspell --channel="$JETBRAINS_DATASPELL_CHANNEL"
+    sudo snap install --classic goland --channel="$JETBRAINS_GOLAND_CHANNEL"
+    sudo snap install --classic intellij-idea-ultimate --channel="$JETBRAINS_INTELLIJ_IDEA_ULTIMATE_CHANNEL"
+    sudo snap install --classic phpstorm --channel="$JETBRAINS_PHPSTORM_CHANNEL"
+    sudo snap install --classic pycharm-professional --channel="$JETBRAINS_PYCHARM_PROFESSIONAL_CHANNEL"
+    sudo snap install --classic rider --channel="$JETBRAINS_RIDER_CHANNEL"
+    sudo snap install --classic rubymine --channel="$JETBRAINS_RUBYMINE_CHANNEL"
+    sudo snap install --classic webstorm --channel="$JETBRAINS_WEBSTORM_CHANNEL"
 
     # Apps
     sudo snap install kdenlive
@@ -194,8 +206,8 @@ install_python() {
     reload_bashrc
     
     # install python
-    pyenv install $PYTHON_VERSION
-    pyenv global $PYTHON_VERSION
+    pyenv install "$PYTHON_VERSION"
+    pyenv global "$PYTHON_VERSION"
 
     # upgrade pip
     pip3 install --upgrade pip
@@ -235,8 +247,8 @@ install_ruby() {
     install_ruby_build
     
     # install ruby
-    rbenv install $RUBY_VERSION
-    rbenv global $RUBY_VERSION
+    rbenv install "$RUBY_VERSION"
+    rbenv global "$RUBY_VERSION"
 }
 
 install_sdkman() {
