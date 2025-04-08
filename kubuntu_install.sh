@@ -253,6 +253,11 @@ install_ruby() {
     rbenv global "$RUBY_VERSION"
 }
 
+load_sdkman() {
+    # load sdkman for this script
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+}
+
 install_sdkman() {
     # install sdkman
     if [ -d ~/.sdkman ]; then
@@ -265,8 +270,8 @@ install_sdkman() {
     sed -i -e 's/sdkman_auto_answer=false/sdkman_auto_answer=true/g' ~/.sdkman/etc/config
     # reload bashrc
     reload_bashrc
-    # load sdkman
-    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    # load sdkman for this script
+    load_sdkman
     
     # install java versions
     for version in "${SDKMAN_JAVA_VERSIONS[@]}"; do
