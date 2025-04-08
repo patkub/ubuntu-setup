@@ -31,6 +31,9 @@ SDKMAN_DEFAULT_GRADLE="7.6.4"
 # update sudo timestamp
 sudo -v
 
+# get dpkg architecture, i.e. "amd64"
+ARCHITECTURE=$(dpkg --print-architecture)
+
 reload_bashrc() {
     # reload bashrc
     PS1='$ '
@@ -90,7 +93,7 @@ install_apt() {
 
     # Google Chrome
     curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
-    sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
     # update list of available packages
     sudo apt update -y
 
