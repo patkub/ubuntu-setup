@@ -46,12 +46,6 @@ sudo -v
 # get dpkg architecture, i.e. "amd64"
 ARCHITECTURE=$(dpkg --print-architecture)
 
-reload_bashrc() {
-    # reload bashrc
-    PS1='$ '
-    source ~/.bashrc
-}
-
 display_menu() {
     PS3='Please enter your choice: '
     options=("Install" "Quit")
@@ -198,12 +192,19 @@ EOF
     fi
 }
 
+load_pyenv() {
+    # load pyenv for this script
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init - bash)"
+    eval "$(pyenv virtualenv-init -)"
+}
+
 install_python() {
     # install pyenv
     install_pyenv
-    
-    # reload bashrc
-    reload_bashrc
+    # load pyenv for this script
+    load_pyenv
     
     # install python
     pyenv install "$PYTHON_VERSION"
@@ -232,19 +233,20 @@ EOF
     fi
 }
 
-install_ruby_build() {
-    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+load_rbenv() {
+    # load rbenv for this script
+    eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
 }
 
 install_ruby() {
     # install rbenv
     install_rbenv
     
-    # reload bashrc
-    reload_bashrc
+    # load rbenv for this script
+    load_rbenv
     
     # install ruby-build
-    install_ruby_build
+    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
     
     # install ruby
     rbenv install "$RUBY_VERSION"
@@ -283,6 +285,13 @@ install_sdkman() {
     sed -i -e 's/sdkman_auto_answer=true/sdkman_auto_answer=false/g' ~/.sdkman/etc/config
 }
 
+load_nvm() {
+    # load nvm for this script
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+
 install_node() {
     # install nvm
     # https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script
@@ -299,9 +308,8 @@ export NVM_DIR="$HOME/.nvm"
 EOF
     fi
 
-    # load nvm
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    # load nvm for this script
+    load_nvm
 
     nvm install --lts
     nvm use --lts
