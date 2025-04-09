@@ -137,6 +137,7 @@ install_apt() {
         google-chrome-stable \
         htop \
         obs-studio \
+        podman \
         psensor \
         solaar \
         speedtest
