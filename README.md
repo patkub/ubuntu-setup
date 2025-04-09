@@ -1,6 +1,6 @@
 # ubuntu-setup
 
-### Environment
+## Environment
 
 Tested on the following distributions
   - Ubuntu 24.04.2 LTS (Noble Numbat)
@@ -8,9 +8,23 @@ Tested on the following distributions
 
 Pick the script corresponding to your distribution.
 
-### Ubuntu Install
+## Install
 
-Make the script executable
+Ubuntu
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/main/ubuntu_install.sh)
+```
+
+Kubuntu
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/main/kubuntu_install.sh)
+```
+
+## Manual Install
+
+### Ubuntu
+
+Make the script executable.
 ```bash
 chmod +x ./ubuntu_install.sh
 ```
@@ -20,7 +34,7 @@ Run the script and select 1 to install.
 ./ubuntu_install.sh
 ```
 
-### Kubuntu Install
+### Kubuntu
 
 Make the script executable
 ```bash
