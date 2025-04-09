@@ -12,12 +12,12 @@ Pick the script corresponding to your distribution.
 
 Ubuntu
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/main/ubuntu_install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/noble/ubuntu_install.sh)
 ```
 
 Kubuntu
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/main/kubuntu_install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/noble/kubuntu_install.sh)
 ```
 
 ## Manual Install
