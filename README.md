@@ -8,19 +8,26 @@ Tested on the following distributions
 
 Pick the script corresponding to your distribution.
 
-## Install
+## Automated Install
 
-Ubuntu
+Requires curl
+```
+sudo apt install -y curl
+```
+
+### Ubuntu
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/main/ubuntu_install.sh)
 ```
 
-Kubuntu
+### Kubuntu
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/main/kubuntu_install.sh)
 ```
 
 ## Manual Install
+
+Clone the repo and run the script for your distribution.
 
 ### Ubuntu
 
