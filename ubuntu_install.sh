@@ -139,6 +139,7 @@ install_apt() {
         obs-studio \
         podman \
         psensor \
+        pipx \
         solaar \
         speedtest
 }
@@ -213,6 +214,9 @@ install_python() {
 
     # upgrade pip
     pip3 install --upgrade pip
+
+    # configure pipx
+    pipx ensurepath
 }
 
 install_rbenv() {
