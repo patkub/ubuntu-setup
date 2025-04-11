@@ -202,6 +202,21 @@ load_pyenv() {
     eval "$(pyenv virtualenv-init -)"
 }
 
+configure_pipx() {
+    # configure pipx
+    pipx ensurepath
+
+    # add pipx completions to bashrc
+    if grep -q "eval \"\$(register-python-argcomplete pipx)\"" ~/.bashrc ; then
+        echo "pipx completions have already been added to ~/.bashrc"
+    else
+        cat <<'EOF' >>~/.bashrc
+# pipx
+eval "$(register-python-argcomplete pipx)"
+EOF
+    fi
+}
+
 install_python() {
     # install pyenv
     install_pyenv
@@ -216,7 +231,7 @@ install_python() {
     pip3 install --upgrade pip
 
     # configure pipx
-    pipx ensurepath
+    configure_pipx
 }
 
 install_rbenv() {
