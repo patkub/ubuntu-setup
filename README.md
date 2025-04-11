@@ -16,11 +16,15 @@ sudo apt install -y curl
 ```
 
 ### Ubuntu
+
+Run the script and select 1 to install.
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/noble/ubuntu_install.sh)
 ```
 
 ### Kubuntu
+
+Run the script and select 1 to install.
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/noble/kubuntu_install.sh)
 ```
