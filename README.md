@@ -13,8 +13,8 @@ Installs the following applications and configurations.
   - [fastfetch](https://github.com/fastfetch-cli/fastfetch) - neofetch like system information tool.
   - [git](https://git-scm.com/) - version control system
   - [htop](https://htop.dev/) - interactive process viewer
-  - podman
-  - speedtest
+  - [podman](https://podman.io/) - container tools
+  - [Speedtest](https://www.speedtest.net/apps/cli) - Internet speedtest for the command line
 - GUI apps
   - [Google Chrome](https://www.google.com/chrome/) - Web browser
   - [Kdenlive](https://kdenlive.org/en/) - Free and Open Source Video Editor
