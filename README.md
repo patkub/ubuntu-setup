@@ -1,5 +1,36 @@
 # ubuntu-setup
 
+## Description
+
+These scripts setup my linux development environment.
+
+### List of Apps
+
+Installs the following applications and configurations.
+
+- [Cloudflare DNS over TLS](https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved)
+- CLI apps
+  - [fastfetch](https://github.com/fastfetch-cli/fastfetch) - neofetch like system information tool
+  - [git](https://git-scm.com/) - version control system
+  - [htop](https://htop.dev/) - interactive process viewer
+  - [podman](https://podman.io/) - container tools
+  - [Speedtest](https://www.speedtest.net/apps/cli) - internet speedtest for the command line
+- GUI apps
+  - [Google Chrome](https://www.google.com/chrome/) - web browser
+  - [Kdenlive](https://kdenlive.org/en/) - free and open source video editor
+  - [OBS Studio](https://obsproject.com/) - free and open source software for video recording and live streaming
+  - [psensor](https://github.com/chinf/psensor) - a graphical sensor monitoring and logging utility
+  - [solaar](https://github.com/pwr-Solaar/Solaar) - Logitech device manager
+- IDEs
+  - [JetBrains](https://www.jetbrains.com/)
+  - [Visual Studio Code](https://code.visualstudio.com/)
+- SDKs
+  - [Go](https://go.dev/)
+  - Java: [SDKMan](https://sdkman.io/)
+  - Node.JS: [nvm](https://github.com/nvm-sh/nvm)
+  - Python: [pyenv](https://github.com/pyenv/pyenv), [pipx](https://pipx.pypa.io/stable/)
+  - Ruby: [rbenv](https://rbenv.org/)
+
 ## Environment
 
 Tested on the following distributions
