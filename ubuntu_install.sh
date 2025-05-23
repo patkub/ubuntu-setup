@@ -75,7 +75,7 @@ setup_cloudflare_dns() {
 DNS=1.1.1.1#one.one.one.one
 DNSOverTLS=yes
 EOF'
-    # reload systemd-resolvd
+    # reload systemd-resolved
     sudo systemctl daemon-reload
 }
 
