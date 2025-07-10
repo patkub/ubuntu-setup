@@ -138,6 +138,7 @@ install_apt() {
         htop \
         obs-studio \
         podman \
+        podman-compose \
         psensor \
         pipx \
         solaar \
