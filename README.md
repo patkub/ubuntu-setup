@@ -27,7 +27,7 @@ Installs the following applications and configurations.
 - SDKs
   - [Go](https://go.dev/)
   - Java: [SDKMan](https://sdkman.io/)
-  - Node.JS: [nvm](https://github.com/nvm-sh/nvm)
+  - Node.JS: [nvm](https://github.com/nvm-sh/nvm), [nx](https://nx.dev/)
   - Python: [pyenv](https://github.com/pyenv/pyenv), [pipx](https://pipx.pypa.io/stable/)
   - Ruby: [rbenv](https://rbenv.org/)
 

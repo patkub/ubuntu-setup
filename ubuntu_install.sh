@@ -84,6 +84,8 @@ install_apt() {
     
     # Fastfetch
     sudo add-apt-repository -ys ppa:zhangsongcui3371/fastfetch
+    # nx
+    sudo add-apt-repository -ys ppa:nrwl/nx
     # OBS Studio
     sudo add-apt-repository -ys ppa:obsproject/obs-studio
     # Solaar
@@ -136,6 +138,7 @@ install_apt() {
         git \
         google-chrome-stable \
         htop \
+        nx \
         obs-studio \
         podman \
         podman-compose \
