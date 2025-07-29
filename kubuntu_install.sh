@@ -6,7 +6,7 @@
 
 PYTHON_VERSION="3.13.2"
 RUBY_VERSION="3.4.2"
-NVM_VERSION="0.40.2"
+NVM_VERSION="0.40.3"
 
 # SDKMAN versions to install
 declare -a SDKMAN_JAVA_VERSIONS=(
@@ -321,10 +321,14 @@ load_nvm() {
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
 
-install_node() {
-    # install nvm
-    # https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
+install_nvm() {
+    # install nvm if not already installed
+    if command -v nvm &> /dev/null; then
+        echo "nvm is already installed"
+    else
+        # install nvm
+        curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
+    fi
 
     # add nvm to bashrc
     if grep -q "NVM_DIR" ~/.bashrc ; then
@@ -342,6 +346,15 @@ EOF
 
     nvm install --lts
     nvm use --lts
+}
+
+install_pnpm() {
+    # install pnpm
+    if command -v pnpm &> /dev/null; then
+        echo "pnpm is already installed"
+    else
+        curl -fsSL https://get.pnpm.io/install.sh | sh -
+    fi
 }
 
 setup_look() {
@@ -367,7 +380,9 @@ setup_all() {
     install_sdkman
 
     # node
-    install_node
+    install_nvm
+    # pnpm
+    install_pnpm
     
     # theming
     setup_look
