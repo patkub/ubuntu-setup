@@ -73,7 +73,7 @@ setup_dns() {
     # https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved
     sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/resolved.conf
 [Resolve]
-DNS=1.1.1.1 1.0.0.1
+DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
 DNSSEC=yes
 DNSOverTLS=yes
 EOF'
@@ -81,7 +81,7 @@ EOF'
     # secondary DNS to Quad9
     sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/fallback_dns.conf
 [Resolve]
-FallbackDNS=9.9.9.9 149.112.112.112
+FallbackDNS=9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net 2620:fe::fe#dns.quad9.net 2620:fe::9#dns.quad9.net
 DNSSEC=yes
 DNSOverTLS=yes
 EOF'
