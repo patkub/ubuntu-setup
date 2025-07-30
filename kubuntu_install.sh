@@ -65,18 +65,29 @@ display_menu() {
     done
 }
 
-setup_cloudflare_dns() {
-    # setup cloudflare dns
-    # https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved
+setup_dns() {
+    # Cloudflare and Quad9 DNS
     sudo mkdir -p /etc/systemd/resolved.conf.d/
-    sudo touch /etc/systemd/resolved.conf.d/resolved.conf
+
+    # primary DNS to Cloudflare
+    # https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved
     sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/resolved.conf
 [Resolve]
-DNS=1.1.1.1#one.one.one.one
+DNS=1.1.1.1 1.0.0.1
+DNSSEC=yes
 DNSOverTLS=yes
 EOF'
-    # reload systemd-resolved
-    sudo systemctl daemon-reload
+
+    # secondary DNS to Quad9
+    sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/fallback_dns.conf
+[Resolve]
+FallbackDNS=9.9.9.9 149.112.112.112
+DNSSEC=yes
+DNSOverTLS=yes
+EOF'
+
+    # restart systemd-resolved
+    sudo systemctl restart systemd-resolved.service
 }
 
 install_apt() {
@@ -363,8 +374,8 @@ setup_look() {
 }
 
 setup_all() {
-    # cloudflare dns
-    setup_cloudflare_dns
+    # Cloudflare and Quad9 DNS
+    setup_dns
 
     # install apt packages
     install_apt
