@@ -180,6 +180,7 @@ install_snaps() {
     sudo snap install --classic webstorm --channel="$JETBRAINS_WEBSTORM_CHANNEL"
 
     # Apps
+    sudo snap install gimp
     sudo snap install kdenlive
     
     # Remove thunderbird
