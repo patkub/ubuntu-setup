@@ -6,7 +6,6 @@
 
 PYTHON_VERSION="3.13.2"
 RUBY_VERSION="3.4.2"
-NVM_VERSION="0.40.3"
 
 # SDKMAN versions to install
 declare -a SDKMAN_JAVA_VERSIONS=(
@@ -326,38 +325,15 @@ install_sdkman() {
     sed -i -e 's/sdkman_auto_answer=true/sdkman_auto_answer=false/g' ~/.sdkman/etc/config
 }
 
-load_nvm() {
-    # load nvm for this script
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-}
-
-install_nvm() {
-    # install nvm if not already installed
-    if command -v nvm &> /dev/null; then
-        echo "nvm is already installed"
-    else
-        # install nvm
-        curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh" | bash
-    fi
-
-    # add nvm to bashrc
-    if grep -q "NVM_DIR" ~/.bashrc ; then
-        echo "nvm has already been added to ~/.bashrc"
-    else
-        cat <<'EOF' >>~/.bashrc
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-EOF
-    fi
-
-    # load nvm for this script
-    load_nvm
-
-    nvm install --lts
-    nvm use --lts
+load_pnpm() {
+    # load pnpm for this script
+    # pnpm
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+    # pnpm end
 }
 
 install_pnpm() {
@@ -367,6 +343,14 @@ install_pnpm() {
     else
         curl -fsSL https://get.pnpm.io/install.sh | sh -
     fi
+
+    # load pnpm for this script
+    load_pnpm
+
+    # use pnpm to install node lts
+    pnpm env use --global lts
+    # update npm to latest
+    npm install -g npm
 }
 
 setup_look() {
@@ -391,9 +375,7 @@ setup_all() {
     # sdkman
     install_sdkman
 
-    # node
-    install_nvm
-    # pnpm
+    # install pnpm
     install_pnpm
     
     # theming

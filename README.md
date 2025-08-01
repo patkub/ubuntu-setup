@@ -31,8 +31,7 @@ Installs the following applications and configurations.
   - [Go](https://go.dev/)
   - Java: [SDKMan](https://sdkman.io/)
   - Node.JS:
-    - [nvm](https://github.com/nvm-sh/nvm) - Node version manager
-    - [pnpm](https://pnpm.io/) - Fast, disk space efficient package manager
+    - [pnpm](https://pnpm.io/) - Node version and package manager
     - [Nx](https://nx.dev/) - Build platform
   - Python: [pyenv](https://github.com/pyenv/pyenv), [pipx](https://pipx.pypa.io/stable/)
   - Ruby: [rbenv](https://rbenv.org/)
