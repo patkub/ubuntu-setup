@@ -21,6 +21,7 @@ Installs the following applications and configurations.
   - [Google Chrome](https://www.google.com/chrome/) - web browser
   - [Kdenlive](https://kdenlive.org/en/) - free and open source video editor
   - [OBS Studio](https://obsproject.com/) - free and open source software for video recording and live streaming
+  - [GIMP](https://www.gimp.org/) - GNU Image Manipulation Program
   - [psensor](https://github.com/chinf/psensor) - a graphical sensor monitoring and logging utility
   - [solaar](https://github.com/pwr-Solaar/Solaar) - Logitech device manager
 - IDEs
