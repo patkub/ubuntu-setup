@@ -94,8 +94,6 @@ install_apt() {
     
     # Fastfetch
     sudo add-apt-repository -ys ppa:zhangsongcui3371/fastfetch
-    # nx
-    sudo add-apt-repository -ys ppa:nrwl/nx
     # OBS Studio
     sudo add-apt-repository -ys ppa:obsproject/obs-studio
     # Solaar
@@ -148,7 +146,6 @@ install_apt() {
         git \
         google-chrome-stable \
         htop \
-        nx \
         obs-studio \
         podman \
         podman-compose \
@@ -303,8 +300,6 @@ install_sdkman() {
     curl -s "https://get.sdkman.io" | bash
     # make sdkman auto answer
     sed -i -e 's/sdkman_auto_answer=false/sdkman_auto_answer=true/g' ~/.sdkman/etc/config
-    # reload bashrc
-    reload_bashrc
     # load sdkman for this script
     load_sdkman
     
@@ -347,10 +342,13 @@ install_pnpm() {
     # load pnpm for this script
     load_pnpm
 
-    # use pnpm to install node lts
+    # use pnpm to install node lts globally
     pnpm env use --global lts
     # update npm to latest
     npm install -g npm
+
+    # install Nx globally
+    pnpm add --global nx
 }
 
 setup_look() {
