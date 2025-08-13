@@ -65,7 +65,7 @@ display_menu() {
 }
 
 setup_dns() {
-    # Cloudflare and Quad9 DNS
+    # Cloudflare and Google DNS
     sudo mkdir -p /etc/systemd/resolved.conf.d/
 
     # primary DNS to Cloudflare
@@ -77,10 +77,10 @@ DNSSEC=yes
 DNSOverTLS=yes
 EOF'
 
-    # secondary DNS to Quad9
+    # secondary DNS to Google
     sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/fallback_dns.conf
 [Resolve]
-FallbackDNS=9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net 2620:fe::fe#dns.quad9.net 2620:fe::9#dns.quad9.net
+FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8888#dns.google 2001:4860:4860::8844#dns.google
 DNSSEC=yes
 DNSOverTLS=yes
 EOF'
@@ -383,7 +383,7 @@ setup_gsettings() {
 }
 
 setup_all() {
-    # Cloudflare and Quad9 DNS
+    # Cloudflare and Google DNS
     setup_dns
 
     # install apt packages

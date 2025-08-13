@@ -9,8 +9,8 @@ These scripts setup my linux development environment.
 Installs the following applications and configurations.
 
 - DNS
-  - [Cloudflare DNS over TLS](https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved)
-  - [Quad9](https://quad9.net/) DNS
+  - [Cloudflare DNS](https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved)
+  - [Google DNS](https://developers.google.com/speed/public-dns/docs/using)
 - CLI apps
   - [fastfetch](https://github.com/fastfetch-cli/fastfetch) - neofetch like system information tool
   - [git](https://git-scm.com/) - version control system
