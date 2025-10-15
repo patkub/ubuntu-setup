@@ -151,6 +151,7 @@ install_apt() {
         podman-compose \
         psensor \
         pipx \
+        smartmontools \
         solaar \
         speedtest
 }

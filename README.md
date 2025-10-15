@@ -16,6 +16,7 @@ Installs the following applications and configurations.
   - [git](https://git-scm.com/) - version control system
   - [htop](https://htop.dev/) - interactive process viewer
   - [podman](https://podman.io/) - container tools
+  - [smartmontools](https://www.smartmontools.org/) - monitor storage systems using Self-Monitoring, Analysis and Reporting Technology System (SMART)
   - [Speedtest](https://www.speedtest.net/apps/cli) - internet speedtest for the command line
 - GUI apps
   - [Google Chrome](https://www.google.com/chrome/) - web browser
