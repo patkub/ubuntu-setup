@@ -64,31 +64,6 @@ display_menu() {
     done
 }
 
-setup_dns() {
-    # Cloudflare and Google DNS
-    sudo mkdir -p /etc/systemd/resolved.conf.d/
-
-    # primary DNS to Cloudflare
-    # https://developers.cloudflare.com/1.1.1.1/setup/linux/#systemd-resolved
-    sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/resolved.conf
-[Resolve]
-DNS=1.1.1.1#cloudflare-dns.com 1.0.0.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com 2606:4700:4700::1001#cloudflare-dns.com
-DNSSEC=yes
-DNSOverTLS=yes
-EOF'
-
-    # secondary DNS to Google
-    sudo bash -c 'cat << EOF > /etc/systemd/resolved.conf.d/fallback_dns.conf
-[Resolve]
-FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8888#dns.google 2001:4860:4860::8844#dns.google
-DNSSEC=yes
-DNSOverTLS=yes
-EOF'
-
-    # restart systemd-resolved
-    sudo systemctl restart systemd-resolved.service
-}
-
 install_apt() {
     # add repositories
     
@@ -106,6 +81,17 @@ install_apt() {
 
     # install curl
     sudo apt install -y curl
+
+    # Cloudflare GPG key
+    sudo mkdir -p --mode=0755 /usr/share/keyrings
+    curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+    curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+
+    # Add Cloudflare repos to apt repositories
+    # cloudflared
+    echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+    # cloudflare-warp
+    echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
 
     # Google Chrome
     curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
@@ -142,6 +128,8 @@ install_apt() {
     
     # install apps
     sudo apt install -y \
+        cloudflared \
+        cloudflare-warp \
         fastfetch \
         git \
         google-chrome-stable \
@@ -358,9 +346,6 @@ setup_look() {
 }
 
 setup_all() {
-    # Cloudflare and Google DNS
-    setup_dns
-
     # install apt packages
     install_apt
     
