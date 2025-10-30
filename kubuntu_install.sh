@@ -112,14 +112,6 @@ install_apt() {
     # update list of available packages
     sudo apt update -y
 
-    # Speedtest CLI
-    # override os detection
-    export os="ubuntu"
-    export dist="jammy"
-    # Setup Speedtest CLI repository
-    # download Speedtest CLI script and pass os detection variables to bash shell
-    curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo -E bash
-
     # install build dependencies
     # python dependencies from https://github.com/pyenv/pyenv/wiki#suggested-build-environment
     sudo apt install -y \
