@@ -15,6 +15,7 @@ Installs the following applications and configurations.
   - [fastfetch](https://github.com/fastfetch-cli/fastfetch) - neofetch like system information tool
   - [git](https://git-scm.com/) - version control system
   - [htop](https://htop.dev/) - interactive process viewer
+  - [mediainfo](https://mediaarea.net/en/MediaInfo) - Command-line utility for reading information from audio/video files
   - [podman](https://podman.io/) - container tools
   - [smartmontools](https://www.smartmontools.org/) - monitor storage systems using Self-Monitoring, Analysis and Reporting Technology System (SMART)
   - [Speedtest](https://www.speedtest.net/apps/cli) - internet speedtest for the command line

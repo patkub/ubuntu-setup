@@ -173,6 +173,7 @@ install_snaps() {
     # Apps
     sudo snap install gimp
     sudo snap install kdenlive
+    sudo snap install mediainfo
     
     # Remove thunderbird
     sudo snap remove --purge thunderbird
