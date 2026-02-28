@@ -215,7 +215,7 @@ configure_pipx() {
     pipx ensurepath
 
     # add pipx completions to bashrc
-    if grep -q "eval \"\$(register-python-argcomplete pipx)\"" ~/.bashrc ; then
+    if grep 'eval "$(register-python-argcomplete pipx)"' ~/.bashrc ; then
         echo "pipx completions have already been added to ~/.bashrc"
     else
         cat <<'EOF' >>~/.bashrc
@@ -279,6 +279,19 @@ install_ruby() {
     # install ruby
     rbenv install "$RUBY_VERSION"
     rbenv global "$RUBY_VERSION"
+}
+
+install_go() {
+    # add go to bashrc
+    if grep -q 'export GOPATH="$HOME/go"' ~/.bashrc ; then
+        echo "go has already been added to ~/.bashrc"
+    else
+        cat <<'EOF' >>~/.bashrc
+# go
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+EOF
+    fi
 }
 
 load_sdkman() {
@@ -385,9 +398,10 @@ setup_all() {
     # install snaps
     install_snaps
 
-    # python and ruby
+    # sdks
     install_python
     install_ruby
+    install_go
     
     # sdkman
     install_sdkman
