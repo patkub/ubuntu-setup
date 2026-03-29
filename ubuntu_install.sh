@@ -24,16 +24,16 @@ SDKMAN_DEFAULT_JAVA="21.0.8-amzn"
 SDKMAN_DEFAULT_GRADLE="7.6.6"
 
 # JetBrains
-JETBRAINS_CLION_CHANNEL="2024.3/stable"
-JETBRAINS_DATAGRIP_CHANNEL="2024.3/stable"
-JETBRAINS_DATASPELL_CHANNEL="2024.3/stable"
-JETBRAINS_GOLAND_CHANNEL="2024.3/stable"
-JETBRAINS_INTELLIJ_IDEA_ULTIMATE_CHANNEL="2024.3/stable"
-JETBRAINS_PHPSTORM_CHANNEL="2024.3/stable"
-JETBRAINS_PYCHARM_PROFESSIONAL_CHANNEL="2024.3/stable"
-JETBRAINS_RIDER_CHANNEL="2024.3/stable"
-JETBRAINS_RUBYMINE_CHANNEL="2024.3/stable"
-JETBRAINS_WEBSTORM_CHANNEL="2024.3/stable"
+JETBRAINS_CLION_CHANNEL="2026.1/stable"
+JETBRAINS_DATAGRIP_CHANNEL="2026.1/stable"
+JETBRAINS_DATASPELL_CHANNEL="2025.3/stable"
+JETBRAINS_GOLAND_CHANNEL="2026.1/stable"
+JETBRAINS_INTELLIJ_IDEA_CHANNEL="2026.1/stable"
+JETBRAINS_PHPSTORM_CHANNEL="2026.1/stable"
+JETBRAINS_PYCHARM_CHANNEL="2025.3/stable"
+JETBRAINS_RIDER_CHANNEL="2025.3/stable"
+JETBRAINS_RUBYMINE_CHANNEL="2026.1/stable"
+JETBRAINS_WEBSTORM_CHANNEL="2026.1/stable"
 
 ###
 ### Start
@@ -155,17 +155,15 @@ install_snaps() {
     # Programming
     sudo snap install --classic code
     sudo snap install --classic go
-    sudo snap install --classic intellij-idea-community
-    sudo snap install --classic pycharm-community
 
     # JetBrains
     sudo snap install --classic clion --channel="$JETBRAINS_CLION_CHANNEL"
     sudo snap install --classic datagrip --channel="$JETBRAINS_DATAGRIP_CHANNEL"
     sudo snap install --classic dataspell --channel="$JETBRAINS_DATASPELL_CHANNEL"
     sudo snap install --classic goland --channel="$JETBRAINS_GOLAND_CHANNEL"
-    sudo snap install --classic intellij-idea-ultimate --channel="$JETBRAINS_INTELLIJ_IDEA_ULTIMATE_CHANNEL"
+    sudo snap install --classic intellij-idea --channel="$JETBRAINS_INTELLIJ_IDEA_CHANNEL"
     sudo snap install --classic phpstorm --channel="$JETBRAINS_PHPSTORM_CHANNEL"
-    sudo snap install --classic pycharm-professional --channel="$JETBRAINS_PYCHARM_PROFESSIONAL_CHANNEL"
+    sudo snap install --classic pycharm --channel="$JETBRAINS_PYCHARM_CHANNEL"
     sudo snap install --classic rider --channel="$JETBRAINS_RIDER_CHANNEL"
     sudo snap install --classic rubymine --channel="$JETBRAINS_RUBYMINE_CHANNEL"
     sudo snap install --classic webstorm --channel="$JETBRAINS_WEBSTORM_CHANNEL"
@@ -377,7 +375,7 @@ setup_gsettings() {
     # app folders
     gsettings set org.gnome.desktop.app-folders folder-children "['Programming', 'Office', 'SoundVideo', 'Accessories', 'Utilities']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Programming/ name "Programming"
-    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Programming/ apps "['code_code.desktop', 'intellij-idea-ultimate_intellij-idea-ultimate.desktop', 'pycharm-professional_pycharm-professional.desktop', 'clion_clion.desktop', 'datagrip_datagrip.desktop', 'dataspell_dataspell.desktop', 'goland_goland.desktop', 'phpstorm_phpstorm.desktop', 'rider_rider.desktop', 'rubymine_rubymine.desktop', 'webstorm_webstorm.desktop', 'intellij-idea-community_intellij-idea-community.desktop', 'pycharm-community_pycharm-community.desktop']"
+    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Programming/ apps "['code_code.desktop', 'intellij-idea_intellij-idea.desktop', 'pycharm_pycharm.desktop', 'clion_clion.desktop', 'datagrip_datagrip.desktop', 'dataspell_dataspell.desktop', 'goland_goland.desktop', 'phpstorm_phpstorm.desktop', 'rider_rider.desktop', 'rubymine_rubymine.desktop', 'webstorm_webstorm.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Office"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['libreoffice-startcenter.desktop', 'libreoffice-writer.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-math.desktop', 'libreoffice-impress.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/SoundVideo/ name "Sound & Video"
