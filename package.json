@@ -1,0 +1,21 @@
+{
+  "name": "ubuntu-setup",
+  "private": true,
+  "version": "1.0.0",
+  "description": "These scripts setup my linux development environment.",
+  "homepage": "https://github.com/patkub/ubuntu-setup#readme",
+  "bugs": {
+    "url": "https://github.com/patkub/ubuntu-setup/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patkub/ubuntu-setup.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "lint": "shellcheck -x *.sh"
+  }
+}

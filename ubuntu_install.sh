@@ -181,7 +181,7 @@ install_snaps() {
 
 install_pyenv() {
     # install pyvenv
-    if [ -d ~/.pyenv ]; then
+    if [[ -d ~/.pyenv ]]; then
         echo "pyenv is already installed for current user"
     else
         curl -fsSL https://pyenv.run | bash
@@ -215,6 +215,7 @@ configure_pipx() {
     pipx ensurepath
 
     # add pipx completions to bashrc
+    # shellcheck disable=2016
     if grep 'eval "$(register-python-argcomplete pipx)"' ~/.bashrc ; then
         echo "pipx completions have already been added to ~/.bashrc"
     else
@@ -244,13 +245,14 @@ install_python() {
 
 install_rbenv() {
     # install rbenv
-    if [ -d ~/.rbenv ]; then
+    if [[ -d ~/.rbenv ]]; then
         echo "rbenv is already installed for current user"
     else
         git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     fi
 
     # add rbenv to bashrc
+    # shellcheck disable=2088
     if grep -q "~/.rbenv/bin/rbenv" ~/.bashrc ; then
         echo "rbenv has already been added to ~/.bashrc"
     else
@@ -283,6 +285,7 @@ install_ruby() {
 
 install_go() {
     # add go to bashrc
+    # shellcheck disable=2016
     if grep -q 'export GOPATH="$HOME/go"' ~/.bashrc ; then
         echo "go has already been added to ~/.bashrc"
     else
@@ -298,6 +301,7 @@ install_rust() {
     curl -fsS https://sh.rustup.rs | sh -s -- -y
 
     # add rust to bashrc
+    # shellcheck disable=2016
     if grep -q 'source "$HOME/.cargo/env"' ~/.bashrc ; then
         echo "rust has already been added to ~/.bashrc"
     else
@@ -310,12 +314,13 @@ EOF
 
 load_sdkman() {
     # load sdkman for this script
+    # shellcheck disable=1091
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 }
 
 install_sdkman() {
     # install sdkman
-    if [ -d ~/.sdkman ]; then
+    if [[ -d ~/.sdkman ]]; then
         echo "sdkman is already installed for current user"
         return
     fi

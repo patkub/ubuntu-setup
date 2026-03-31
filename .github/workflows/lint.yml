@@ -1,0 +1,33 @@
+# Lint Bash scripts using ShellCheck
+
+name: Lint
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+
+  # Lint Bash scripts
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: "pnpm"
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install
+
+      # Lint Bash scripts using ShellCheck
+      - name: Lint Bash scripts
+        shell: bash
+        run: pnpm lint

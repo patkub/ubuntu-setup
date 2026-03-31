@@ -71,22 +71,22 @@ install_apt_repos() {
     # Cloudflare
     # cloudflared
     curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-main.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
+    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
     # cloudflare-warp
     curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list > /dev/null
+    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list > /dev/null
 
     # HashiCorp
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
 
     # Google Chrome
     curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --yes --dearmor --output /usr/share/keyrings/google-chrome.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 
     # Speedtest CLI
     curl -fsSL https://packagecloud.io/ookla/speedtest-cli/gpgkey | sudo gpg --yes --dearmor --output /usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg] https://packagecloud.io/ookla/speedtest-cli/ubuntu/ jammy main" | sudo tee /etc/apt/sources.list.d/ookla_speedtest-cli.list > /dev/null
+    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg] https://packagecloud.io/ookla/speedtest-cli/ubuntu/ jammy main" | sudo tee /etc/apt/sources.list.d/ookla_speedtest-cli.list > /dev/null
 }
 
 install_apt() {
@@ -181,7 +181,7 @@ install_snaps() {
 
 install_pyenv() {
     # install pyvenv
-    if [ -d ~/.pyenv ]; then
+    if [[ -d ~/.pyenv ]]; then
         echo "pyenv is already installed for current user"
     else
         curl -fsSL https://pyenv.run | bash
@@ -215,6 +215,7 @@ configure_pipx() {
     pipx ensurepath
 
     # add pipx completions to bashrc
+    # shellcheck disable=2016
     if grep 'eval "$(register-python-argcomplete pipx)"' ~/.bashrc ; then
         echo "pipx completions have already been added to ~/.bashrc"
     else
@@ -244,13 +245,14 @@ install_python() {
 
 install_rbenv() {
     # install rbenv
-    if [ -d ~/.rbenv ]; then
+    if [[ -d ~/.rbenv ]]; then
         echo "rbenv is already installed for current user"
     else
         git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     fi
 
     # add rbenv to bashrc
+    # shellcheck disable=2088
     if grep -q "~/.rbenv/bin/rbenv" ~/.bashrc ; then
         echo "rbenv has already been added to ~/.bashrc"
     else
@@ -283,6 +285,7 @@ install_ruby() {
 
 install_go() {
     # add go to bashrc
+    # shellcheck disable=2016
     if grep -q 'export GOPATH="$HOME/go"' ~/.bashrc ; then
         echo "go has already been added to ~/.bashrc"
     else
@@ -298,6 +301,7 @@ install_rust() {
     curl -fsS https://sh.rustup.rs | sh -s -- -y
 
     # add rust to bashrc
+    # shellcheck disable=2016
     if grep -q 'source "$HOME/.cargo/env"' ~/.bashrc ; then
         echo "rust has already been added to ~/.bashrc"
     else
@@ -310,12 +314,13 @@ EOF
 
 load_sdkman() {
     # load sdkman for this script
+    # shellcheck disable=1091
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 }
 
 install_sdkman() {
     # install sdkman
-    if [ -d ~/.sdkman ]; then
+    if [[ -d ~/.sdkman ]]; then
         echo "sdkman is already installed for current user"
         return
     fi
