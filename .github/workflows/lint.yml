@@ -30,4 +30,4 @@ jobs:
       # Lint Bash scripts using ShellCheck
       - name: Lint Bash scripts
         shell: bash
-        run: npm lint
+        run: npm run lint
