@@ -33,6 +33,7 @@ JETBRAINS_PHPSTORM_CHANNEL="2026.1/stable"
 JETBRAINS_PYCHARM_CHANNEL="2025.3/stable"
 JETBRAINS_RIDER_CHANNEL="2025.3/stable"
 JETBRAINS_RUBYMINE_CHANNEL="2026.1/stable"
+JETBRAINS_RUSTROVER_CHANNEL="2026.1/stable"
 JETBRAINS_WEBSTORM_CHANNEL="2026.1/stable"
 
 ###
@@ -166,6 +167,7 @@ install_snaps() {
     sudo snap install --classic pycharm --channel="$JETBRAINS_PYCHARM_CHANNEL"
     sudo snap install --classic rider --channel="$JETBRAINS_RIDER_CHANNEL"
     sudo snap install --classic rubymine --channel="$JETBRAINS_RUBYMINE_CHANNEL"
+    sudo snap install --classic rustrover --channel="$JETBRAINS_RUSTROVER_CHANNEL"
     sudo snap install --classic webstorm --channel="$JETBRAINS_WEBSTORM_CHANNEL"
 
     # Apps
@@ -292,6 +294,20 @@ EOF
     fi
 }
 
+install_rust() {
+    curl -fsS https://sh.rustup.rs | sh -s -- -y
+
+    # add rust to bashrc
+    if grep -q 'source "$HOME/.cargo/env"' ~/.bashrc ; then
+        echo "rust has already been added to ~/.bashrc"
+    else
+        cat <<'EOF' >>~/.bashrc
+# rust
+source "$HOME/.cargo/env"
+EOF
+    fi
+}
+
 load_sdkman() {
     # load sdkman for this script
     source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -374,6 +390,7 @@ setup_all() {
     install_python
     install_ruby
     install_go
+    install_rust
     
     # sdkman
     install_sdkman
