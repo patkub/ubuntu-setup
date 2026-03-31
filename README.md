@@ -37,6 +37,7 @@ Installs the following applications and configurations.
     - [Nx](https://nx.dev/) - Build platform
   - Python: [pyenv](https://github.com/pyenv/pyenv), [pipx](https://pipx.pypa.io/stable/)
   - Ruby: [rbenv](https://rbenv.org/)
+  - Rust: [rustup](https://rust-lang.org/tools/install/)
 
 ## Environment
 
