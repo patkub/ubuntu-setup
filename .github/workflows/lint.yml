@@ -23,6 +23,11 @@ jobs:
           node-version: 24.x
           cache: "npm"
 
+      - name: Install shellcheck
+        run: |
+          sudo apt update
+          sudo apt install -y shellcheck
+
       - name: Install dependencies
         shell: bash
         run: npm install
