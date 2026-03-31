@@ -95,3 +95,13 @@ Run the script and select 1 to install.
 ```bash
 ./kubuntu_install.sh
 ```
+
+## Linting
+
+Bash scripts are linted with [ShellCheck](https://github.com/koalaman/shellcheck).
+
+```bash
+sudo apt install shellcheck
+npm install
+npm run lint
+```
