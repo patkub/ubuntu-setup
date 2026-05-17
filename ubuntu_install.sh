@@ -71,22 +71,53 @@ install_apt_repos() {
     # Cloudflare
     # cloudflared
     curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-main.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/cloudflared.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://pkg.cloudflare.com/cloudflared/
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/cloudflare-main.gpg
+EOF
+
     # cloudflare-warp
     curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/cloudflare-client.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://pkg.cloudflareclient.com/
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+EOF
 
     # HashiCorp
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/hashicorp.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://apt.releases.hashicorp.com/
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+EOF
 
     # Google Chrome
     curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --yes --dearmor --output /usr/share/keyrings/google-chrome.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/google-chrome.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://dl.google.com/linux/chrome/deb/
+Suites: stable
+Components: main
+Signed-By: /usr/share/keyrings/google-chrome.gpg
+EOF
 
     # Speedtest CLI
     curl -fsSL https://packagecloud.io/ookla/speedtest-cli/gpgkey | sudo gpg --yes --dearmor --output /usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg
-    echo "deb [arch=$ARCHITECTURE signed-by=/usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg] https://packagecloud.io/ookla/speedtest-cli/ubuntu/ jammy main" | sudo tee /etc/apt/sources.list.d/ookla_speedtest-cli.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/ookla_speedtest-cli.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://packagecloud.io/ookla/speedtest-cli/ubuntu/
+Suites: jammy
+Components: main
+Signed-By: /usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg
+EOF
 }
 
 install_apt() {
@@ -371,9 +402,9 @@ install_pnpm() {
     load_pnpm
 
     # use pnpm to install node lts globally
-    pnpm env use --global lts
+    pnpm runtime set node lts -g
     # update npm to latest
-    npm install -g npm
+    pnpm add -g npm
 
     # install Nx globally
     pnpm add --global nx
@@ -391,7 +422,7 @@ setup_gsettings() {
     gsettings set org.gnome.desktop.background picture-uri-dark 'file:///usr/share/backgrounds/ubuntu-wallpaper-d.png'
     
     # pinned apps
-    gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.SystemMonitor.desktop', 'org.remmina.Remmina.desktop',]"
+    gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Ptyxis.desktop', 'net.nokyan.Resources.desktop', 'org.remmina.Remmina.desktop']"
     
     # app folders
     gsettings set org.gnome.desktop.app-folders folder-children "['Programming', 'Office', 'SoundVideo', 'Accessories', 'Utilities']"
@@ -400,11 +431,11 @@ setup_gsettings() {
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ name "Office"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Office/ apps "['libreoffice-startcenter.desktop', 'libreoffice-writer.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-math.desktop', 'libreoffice-impress.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/SoundVideo/ name "Sound & Video"
-    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/SoundVideo/ apps "['com.obsproject.Studio.desktop', 'kdenlive_kdenlive.desktop', 'org.gnome.Rhythmbox3.desktop', 'org.gnome.Totem.desktop', 'org.gnome.Shotwell.desktop', 'gimp_gimp.desktop']"
+    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/SoundVideo/ apps "['com.obsproject.Studio.desktop', 'kdenlive_kdenlive.desktop', 'org.gnome.Rhythmbox3.desktop', 'org.gnome.Showtime.desktop', 'org.gnome.Shotwell.desktop', 'gimp_gimp.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Accessories/ name "Accessories"
-    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Accessories/ apps "['org.gnome.Calendar.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.eog.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.clocks.desktop', 'org.gnome.Snapshot.desktop']"
+    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Accessories/ apps "['org.gnome.Calendar.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.eog.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.clocks.desktop', 'org.gnome.Snapshot.desktop', 'org.gnome.Papers.desktop', 'org.gnome.Loupe.desktop']"
     gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ name "Utilities"
-    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['com.cloudflare.WarpTaskbar.desktop', 'firefox_firefox.desktop', 'yelp.desktop', 'snap-store_snap-store.desktop', 'org.gnome.Settings.desktop', 'transmission-gtk.desktop', 'simple-scan.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Logs.desktop', 'org.gnome.Characters.desktop', 'org.gnome.font-viewer.desktop', 'gnome-language-selector.desktop', 'update-manager.desktop', 'software-properties-gtk.desktop', 'software-properties-drivers.desktop', 'firmware-updater_firmware-updater.desktop', 'org.gnome.PowerStats.desktop', 'gnome-session-properties.desktop', 'usb-creator-gtk.desktop', 'htop.desktop', 'psensor.desktop', 'solaar.desktop']"
+    gsettings set org.gnome.desktop.app-folders.folder:/org/gnome/desktop/app-folders/folders/Utilities/ apps "['com.cloudflare.WarpTaskbar.desktop', 'firefox_firefox.desktop', 'yelp.desktop', 'snap-store_snap-store.desktop', 'desktop-security-center_desktop-security-center.desktop', 'org.gnome.Settings.desktop', 'transmission-gtk.desktop', 'simple-scan.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Logs.desktop', 'org.gnome.Characters.desktop', 'org.gnome.font-viewer.desktop', 'gnome-language-selector.desktop', 'update-manager.desktop', 'software-properties-gtk.desktop', 'software-properties-drivers.desktop', 'firmware-updater_firmware-updater.desktop', 'org.gnome.PowerStats.desktop', 'gnome-session-properties.desktop', 'usb-creator-gtk.desktop', 'org.gnome.Sysprof.desktop', 'org.gnome.Yelp.desktop', 'htop.desktop', 'psensor.desktop', 'solaar.desktop']"
     
     # app picker order
     gsettings set org.gnome.shell app-picker-layout "[{'Programming': <{'position': <0>}>, 'Office': <{'position': <1>}>, 'SoundVideo': <{'position': <2>}>, 'Accessories': <{'position': <3>}>, 'Utilities': <{'position': <4>}>}]"

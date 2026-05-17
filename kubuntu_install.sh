@@ -71,22 +71,53 @@ install_apt_repos() {
     # Cloudflare
     # cloudflared
     curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-main.gpg
-    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflared.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/cloudflared.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://pkg.cloudflare.com/cloudflared/
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/cloudflare-main.gpg
+EOF
+
     # cloudflare-warp
     curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/cloudflare-client.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://pkg.cloudflareclient.com/
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+EOF
 
     # HashiCorp
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/hashicorp.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://apt.releases.hashicorp.com/
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+EOF
 
     # Google Chrome
     curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --yes --dearmor --output /usr/share/keyrings/google-chrome.gpg
-    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/google-chrome.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://dl.google.com/linux/chrome/deb/
+Suites: stable
+Components: main
+Signed-By: /usr/share/keyrings/google-chrome.gpg
+EOF
 
     # Speedtest CLI
     curl -fsSL https://packagecloud.io/ookla/speedtest-cli/gpgkey | sudo gpg --yes --dearmor --output /usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg
-    echo "deb [arch=${ARCHITECTURE} signed-by=/usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg] https://packagecloud.io/ookla/speedtest-cli/ubuntu/ jammy main" | sudo tee /etc/apt/sources.list.d/ookla_speedtest-cli.list > /dev/null
+    sudo tee -a /etc/apt/sources.list.d/ookla_speedtest-cli.sources >/dev/null <<'EOF'
+Types: deb
+URIs: https://packagecloud.io/ookla/speedtest-cli/ubuntu/
+Suites: jammy
+Components: main
+Signed-By: /usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg
+EOF
 }
 
 install_apt() {
@@ -371,12 +402,12 @@ install_pnpm() {
     load_pnpm
 
     # use pnpm to install node lts globally
-    pnpm env use --global lts
+    pnpm runtime set node lts -g
     # update npm to latest
-    npm install -g npm
+    pnpm add -g npm
 
     # install Nx globally
-    pnpm add --global nx
+    pnpm add --global nx --allow-build=nx
 }
 
 setup_look() {
