@@ -42,8 +42,8 @@ Installs the following applications and configurations.
 ## Environment
 
 Tested on the following distributions
-  - Ubuntu 24.04.2 LTS (Noble Numbat)
-  - Kubuntu 24.04.2 LTS (Noble Numbat)
+  - Ubuntu 26.04 LTS (Resolute Raccoon)
+  - Kubuntu 26.04 LTS (Resolute Raccoon)
 
 Pick the script corresponding to your distribution.
 
@@ -58,14 +58,14 @@ sudo apt install -y curl
 
 Run the script and select 1 to install.
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/noble/ubuntu_install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/resolute/ubuntu_install.sh)
 ```
 
 ### Kubuntu
 
 Run the script and select 1 to install.
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/noble/kubuntu_install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/patkub/ubuntu-setup/refs/heads/resolute/kubuntu_install.sh)
 ```
 
 ## Manual Install
