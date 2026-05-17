@@ -4,23 +4,23 @@
 ### Definitions
 ###
 
-PYTHON_VERSION="3.13.5"
+PYTHON_VERSION="3.14.5"
 RUBY_VERSION="3.4.1"
 
 # SDKMAN versions to install
 declare -a SDKMAN_JAVA_VERSIONS=(
     "24.0.2-amzn"
-    "21.0.8-amzn"
+    "21.0.11-amzn"
     "17.0.16-amzn"
 )
 
 declare -a SDKMAN_GRADLE_VERSIONS=(
-    "8.14.3"
+    "8.14.5"
     "7.6.6"
 )
 
 # default SDKMAN versions to set
-SDKMAN_DEFAULT_JAVA="21.0.8-amzn"
+SDKMAN_DEFAULT_JAVA="21.0.11-amzn"
 SDKMAN_DEFAULT_GRADLE="7.6.6"
 
 # JetBrains
