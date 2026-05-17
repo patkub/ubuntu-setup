@@ -71,27 +71,29 @@ install_apt_repos() {
     # Cloudflare
     # cloudflared
     curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-main.gpg
-    sudo tee /etc/apt/sources.list.d/cloudflared.sources >/dev/null <<'EOF'
+    sudo tee /etc/apt/sources.list.d/cloudflared.sources >/dev/null <<EOF
 Types: deb
 URIs: https://pkg.cloudflare.com/cloudflared/
-Suites: resolute
+Suites: noble
 Components: main
 Signed-By: /usr/share/keyrings/cloudflare-main.gpg
+Architectures: $ARCHITECTURE
 EOF
 
     # cloudflare-warp
     curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-    sudo tee /etc/apt/sources.list.d/cloudflare-client.sources >/dev/null <<'EOF'
+    sudo tee /etc/apt/sources.list.d/cloudflare-client.sources >/dev/null <<EOF
 Types: deb
 URIs: https://pkg.cloudflareclient.com/
-Suites: resolute
+Suites: noble
 Components: main
 Signed-By: /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+Architectures: $ARCHITECTURE
 EOF
 
     # HashiCorp
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    sudo tee /etc/apt/sources.list.d/hashicorp.sources >/dev/null <<'EOF'
+    sudo tee /etc/apt/sources.list.d/hashicorp.sources >/dev/null <<EOF
 Types: deb
 URIs: https://apt.releases.hashicorp.com/
 Suites: resolute
@@ -101,17 +103,18 @@ EOF
 
     # Google Chrome
     curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --yes --dearmor --output /usr/share/keyrings/google-chrome.gpg
-    sudo tee /etc/apt/sources.list.d/google-chrome.sources >/dev/null <<'EOF'
+    sudo tee /etc/apt/sources.list.d/google-chrome.sources >/dev/null <<EOF
 Types: deb
 URIs: https://dl.google.com/linux/chrome/deb/
 Suites: stable
 Components: main
 Signed-By: /usr/share/keyrings/google-chrome.gpg
+Architectures: $ARCHITECTURE
 EOF
 
     # Speedtest CLI
     curl -fsSL https://packagecloud.io/ookla/speedtest-cli/gpgkey | sudo gpg --yes --dearmor --output /usr/share/keyrings/ookla_speedtest-cli-archive-keyring.gpg
-    sudo tee /etc/apt/sources.list.d/ookla_speedtest-cli.sources >/dev/null <<'EOF'
+    sudo tee /etc/apt/sources.list.d/ookla_speedtest-cli.sources >/dev/null <<EOF
 Types: deb
 URIs: https://packagecloud.io/ookla/speedtest-cli/ubuntu/
 Suites: jammy
