@@ -103,7 +103,7 @@ EOF
 
     # Google Chrome
     curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --yes --dearmor --output /usr/share/keyrings/google-chrome.gpg
-    sudo tee /etc/apt/sources.list.d/google-chrome.sources >/dev/null <<EOF
+    sudo tee /etc/apt/sources.list.d/google-chrome-custom.sources >/dev/null <<EOF
 Types: deb
 URIs: https://dl.google.com/linux/chrome/deb/
 Suites: stable
