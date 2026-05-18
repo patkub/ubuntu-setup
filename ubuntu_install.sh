@@ -410,10 +410,10 @@ install_pnpm() {
     pnpm add -g npm
 
     # install Nx globally
-    pnpm add --global nx
+    pnpm add --global nx --allow-build=nx
 }
 
-setup_gsettings() {
+setup_theme() {
     # dark theme
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-purple-dark'
@@ -464,7 +464,7 @@ setup_all() {
     install_pnpm
     
     # theming
-    setup_gsettings
+    setup_theme
 }
 
 # display menu to install everything

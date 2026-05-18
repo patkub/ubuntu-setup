@@ -413,7 +413,7 @@ install_pnpm() {
     pnpm add --global nx --allow-build=nx
 }
 
-setup_look() {
+setup_theme() {
     # dark theme
     lookandfeeltool -a org.kde.breezedark.desktop
 }
@@ -438,7 +438,7 @@ setup_all() {
     install_pnpm
     
     # theming
-    setup_look
+    setup_theme
 }
 
 # display menu to install everything
