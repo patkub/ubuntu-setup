@@ -153,28 +153,28 @@ install_apt() {
     # python dependencies from https://github.com/pyenv/pyenv/wiki#suggested-build-environment
     # ruby dependencies from https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
     sudo apt install -y \
-        make \
+        autoconf \
         build-essential \
-        libssl-dev \
-        zlib1g-dev \
-        libbz2-dev \
-        libreadline-dev \
-        libsqlite3-dev \
         curl \
         git \
+        libbz2-dev \
+        libffi-dev \
+        libgmp-dev \
+        liblzma-dev \
         libncursesw5-dev \
-        xz-utils \
-        tk-dev \
+        libreadline-dev \
+        libsqlite3-dev \
+        libssl-dev \
         libxml2-dev \
         libxmlsec1-dev \
-        libffi-dev \
-        liblzma-dev \
-        autoconf \
-        libgmp-dev \
         libyaml-dev \
         libzstd-dev \
+        make \
         python3-venv \
-        rustc
+        rustc \
+        tk-dev \
+        xz-utils \
+        zlib1g-dev
     
     # install apps
     sudo apt install -y \
