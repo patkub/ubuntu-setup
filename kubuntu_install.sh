@@ -5,7 +5,7 @@
 ###
 
 PYTHON_VERSION="3.14.5"
-RUBY_VERSION="3.4.1"
+RUBY_VERSION="3.4.9"
 
 # SDKMAN versions to install
 declare -a SDKMAN_JAVA_VERSIONS=(
@@ -151,29 +151,36 @@ install_apt() {
 
     # install build dependencies
     # python dependencies from https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+    # ruby dependencies from https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
     sudo apt install -y \
+        make \
         build-essential \
+        libssl-dev \
+        zlib1g-dev \
         libbz2-dev \
-        libffi-dev \
-        liblzma-dev \
-        libncursesw5-dev \
         libreadline-dev \
         libsqlite3-dev \
-        libssl-dev \
-        libyaml-dev \
+        curl \
+        git \
+        libncursesw5-dev \
+        xz-utils \
+        tk-dev \
         libxml2-dev \
         libxmlsec1-dev \
+        libffi-dev \
+        liblzma-dev \
+        autoconf \
+        libgmp-dev \
+        libyaml-dev \
+        libzstd-dev \
         python3-venv \
-        tk-dev \
-        xz-utils \
-        zlib1g-dev
+        rustc
     
     # install apps
     sudo apt install -y \
         cloudflared \
         cloudflare-warp \
         fastfetch \
-        git \
         google-chrome-stable \
         htop \
         obs-studio \
