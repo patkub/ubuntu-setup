@@ -310,6 +310,15 @@ load_rbenv() {
     eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
 }
 
+install_ruby_build() {
+    # install ruby-build
+    if [[ -d "$(rbenv root)"/plugins/ruby-build ]]; then
+        echo "ruby-build is already installed for current user"
+    else
+        git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+    fi
+}
+
 install_ruby() {
     # install rbenv
     install_rbenv
@@ -318,7 +327,7 @@ install_ruby() {
     load_rbenv
     
     # install ruby-build
-    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+    install_ruby_build
     
     # install ruby
     rbenv install "$RUBY_VERSION"
