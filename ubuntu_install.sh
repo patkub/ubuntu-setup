@@ -24,17 +24,19 @@ SDKMAN_DEFAULT_JAVA="21.0.11-amzn"
 SDKMAN_DEFAULT_GRADLE="7.6.6"
 
 # JetBrains
-JETBRAINS_CLION_CHANNEL="2026.1/stable"
-JETBRAINS_DATAGRIP_CHANNEL="2026.1/stable"
-JETBRAINS_DATASPELL_CHANNEL="2025.3/stable"
-JETBRAINS_GOLAND_CHANNEL="2026.1/stable"
-JETBRAINS_INTELLIJ_IDEA_CHANNEL="2026.1/stable"
-JETBRAINS_PHPSTORM_CHANNEL="2026.1/stable"
-JETBRAINS_PYCHARM_CHANNEL="2025.3/stable"
-JETBRAINS_RIDER_CHANNEL="2025.3/stable"
-JETBRAINS_RUBYMINE_CHANNEL="2026.1/stable"
-JETBRAINS_RUSTROVER_CHANNEL="2026.1/stable"
-JETBRAINS_WEBSTORM_CHANNEL="2026.1/stable"
+JETBRAINS_CHANNELS=(
+    ["clion"]="2026.1/stable"
+    ["datagrip"]="2026.1/stable"
+    ["dataspell"]="2025.3/stable"
+    ["goland"]="2026.1/stable"
+    ["intellij-idea"]="2026.1/stable"
+    ["phpstorm"]="2026.1/stable"
+    ["pycharm"]="2025.3/stable"
+    ["rider"]="2025.3/stable"
+    ["rubymine"]="2026.1/stable"
+    ["rustrover"]="2026.1/stable"
+    ["webstorm"]="2026.1/stable"
+)
 
 ###
 ### Start
@@ -192,17 +194,17 @@ install_snaps() {
     sudo snap install --classic go
 
     # JetBrains
-    sudo snap install --classic clion --channel="$JETBRAINS_CLION_CHANNEL"
-    sudo snap install --classic datagrip --channel="$JETBRAINS_DATAGRIP_CHANNEL"
-    sudo snap install --classic dataspell --channel="$JETBRAINS_DATASPELL_CHANNEL"
-    sudo snap install --classic goland --channel="$JETBRAINS_GOLAND_CHANNEL"
-    sudo snap install --classic intellij-idea --channel="$JETBRAINS_INTELLIJ_IDEA_CHANNEL"
-    sudo snap install --classic phpstorm --channel="$JETBRAINS_PHPSTORM_CHANNEL"
-    sudo snap install --classic pycharm --channel="$JETBRAINS_PYCHARM_CHANNEL"
-    sudo snap install --classic rider --channel="$JETBRAINS_RIDER_CHANNEL"
-    sudo snap install --classic rubymine --channel="$JETBRAINS_RUBYMINE_CHANNEL"
-    sudo snap install --classic rustrover --channel="$JETBRAINS_RUSTROVER_CHANNEL"
-    sudo snap install --classic webstorm --channel="$JETBRAINS_WEBSTORM_CHANNEL"
+    sudo snap install --classic clion --channel="${JETBRAINS_CHANNELS["clion"]}"
+    sudo snap install --classic datagrip --channel="${JETBRAINS_CHANNELS["datagrip"]}"
+    sudo snap install --classic dataspell --channel="${JETBRAINS_CHANNELS["dataspell"]}"
+    sudo snap install --classic goland --channel="${JETBRAINS_CHANNELS["goland"]}"
+    sudo snap install --classic intellij-idea --channel="${JETBRAINS_CHANNELS["intellij-idea"]}"
+    sudo snap install --classic phpstorm --channel="${JETBRAINS_CHANNELS["phpstorm"]}"
+    sudo snap install --classic pycharm --channel="${JETBRAINS_CHANNELS["pycharm"]}"
+    sudo snap install --classic rider --channel="${JETBRAINS_CHANNELS["rider"]}"
+    sudo snap install --classic rubymine --channel="${JETBRAINS_CHANNELS["rubymine"]}"
+    sudo snap install --classic rustrover --channel="${JETBRAINS_CHANNELS["rustrover"]}"
+    sudo snap install --classic webstorm --channel="${JETBRAINS_CHANNELS["webstorm"]}"
 
     # Apps
     sudo snap install gimp
@@ -250,7 +252,7 @@ configure_pipx() {
 
     # add pipx completions to bashrc
     # shellcheck disable=2016
-    if grep 'eval "$(register-python-argcomplete pipx)"' ~/.bashrc ; then
+    if grep -q 'eval "$(register-python-argcomplete pipx)"' ~/.bashrc ; then
         echo "pipx completions have already been added to ~/.bashrc"
     else
         cat <<'EOF' >>~/.bashrc
