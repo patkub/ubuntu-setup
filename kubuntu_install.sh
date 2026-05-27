@@ -67,7 +67,7 @@ display_menu() {
     done
 }
 
-install_apt_repos() {
+setup_apt_repos() {
     sudo mkdir -p --mode=0755 /usr/share/keyrings
 
     # Cloudflare
@@ -143,8 +143,8 @@ install_apt() {
     # install curl
     sudo apt install -y curl
 
-    # install apt repositories
-    install_apt_repos
+    # setup apt repositories
+    setup_apt_repos
 
     # update list of available packages
     sudo apt update -y
@@ -155,7 +155,6 @@ install_apt() {
     sudo apt install -y \
         autoconf \
         build-essential \
-        curl \
         git \
         libbz2-dev \
         libffi-dev \
