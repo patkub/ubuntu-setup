@@ -4,24 +4,23 @@
 ### Definitions
 ###
 
-PYTHON_VERSION="3.14.5"
+PYTHON_VERSION="3.14.7"
 RUBY_VERSION="3.4.9"
 
 # SDKMAN versions to install
 declare -a SDKMAN_JAVA_VERSIONS=(
-    "24.0.2-amzn"
-    "21.0.11-amzn"
-    "17.0.16-amzn"
+    "25.0.4-amzn"
+    "21.0.12-amzn"
+    "17.0.20-amzn"
 )
 
 declare -a SDKMAN_GRADLE_VERSIONS=(
-    "8.14.5"
-    "7.6.6"
+    "9.7.0"
 )
 
 # default SDKMAN versions to set
-SDKMAN_DEFAULT_JAVA="21.0.11-amzn"
-SDKMAN_DEFAULT_GRADLE="7.6.6"
+SDKMAN_DEFAULT_JAVA="21.0.12-amzn"
+SDKMAN_DEFAULT_GRADLE="9.7.0"
 
 # JetBrains
 JETBRAINS_CHANNELS=(
@@ -370,10 +369,10 @@ install_sdkman() {
     # install sdkman
     if [[ -d ~/.sdkman ]]; then
         echo "sdkman is already installed for current user"
-        return
+    else
+        curl -s "https://get.sdkman.io" | bash
     fi
 
-    curl -s "https://get.sdkman.io" | bash
     # make sdkman auto answer
     sed -i -e 's/sdkman_auto_answer=false/sdkman_auto_answer=true/g' ~/.sdkman/etc/config
     # load sdkman for this script
