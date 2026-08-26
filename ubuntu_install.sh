@@ -127,7 +127,7 @@ EOF
 
 install_apt() {
     # add repositories
-    
+
     # Fastfetch
     sudo add-apt-repository -ys ppa:zhangsongcui3371/fastfetch
     # OBS Studio
@@ -135,19 +135,16 @@ install_apt() {
     # Solaar
     sudo add-apt-repository -ys ppa:solaar-unifying/stable
 
-    # update system
-    sudo apt update -y
-    sudo apt upgrade -y
-    sudo apt dist-upgrade -y
-
-    # install curl
+    # install curl (needed for setup_apt_repos)
     sudo apt install -y curl
 
     # setup apt repositories
     setup_apt_repos
     
-    # update list of available packages
+    # update system
     sudo apt update -y
+    sudo apt upgrade -y
+    sudo apt dist-upgrade -y
 
     # install build dependencies
     # python dependencies from https://github.com/pyenv/pyenv/wiki#suggested-build-environment
