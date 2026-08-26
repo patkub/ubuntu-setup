@@ -271,8 +271,8 @@ install_python() {
     # load pyenv for this script
     load_pyenv
     
-    # install python
-    pyenv install "$PYTHON_VERSION"
+    # install python (skip if already installed)
+    pyenv install -s "$PYTHON_VERSION"
     pyenv global "$PYTHON_VERSION"
 
     # upgrade pip
@@ -326,8 +326,8 @@ install_ruby() {
     # install ruby-build
     install_ruby_build
     
-    # install ruby
-    rbenv install "$RUBY_VERSION"
+    # install ruby (skip if already installed)
+    rbenv install -s "$RUBY_VERSION"
     rbenv global "$RUBY_VERSION"
 }
 
